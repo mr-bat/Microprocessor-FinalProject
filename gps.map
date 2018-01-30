@@ -1,0 +1,39 @@
+RAM Allocation
+Variable                                                          Address   Size
+--------------------------------------------------------------------------------
+rx_buffer                                                         0x0265     120
+gps_init                                                          0x02DD      13
+gps_status                                                        0x02EA      15
+gps_getloc                                                        0x02F9      14
+loc                                                               0x0307     100
+longitude                                                         0x036B      32
+latitude                                                          0x038B      32
+rx_wr_index                                                       0x03AB       1
+rx_rd_index                                                       0x03AC       1
+rx_counter                                                        0x03AD       1
+tx_buffer                                                         0x03AE     120
+tx_wr_index                                                       0x0426       1
+tx_rd_index                                                       0x0427       1
+tx_counter                                                        0x0428       1
+flag                                                              0x0429       2
+counter                                                           0x042B       2
+cnt                                                               0x042D       2
+s                                                                 0x042F       2
+_base_y                                                           0x0431       4
+_lcd_x                                                            0x0435       1
+_lcd_y                                                            0x0436       1
+_lcd_maxx                                                         0x0437       1
+
+EEPROM Allocation
+Variable                                                          Address   Size
+--------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                          Register  Size
+--------------------------------------------------------------------------------
+writeLoc                                                          R4,R5        2
+locEndInd                                                         R6,R7        2
+endLatitude                                                       R8,R9        2
+endLongitude                                                      R10,R11      2
+counter                                                           R12,R13      2
+rx_buffer_overflow                                                R2.0      1bit
