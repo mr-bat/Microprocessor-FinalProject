@@ -64,6 +64,7 @@ Data Stack size         : 512
 // USART Receiver buffer
 #define RX_BUFFER_SIZE 120
 char rx_buffer[RX_BUFFER_SIZE];
+unsigned char module_init[] = {"AT"};
 unsigned char gps_init[] = {"AT+CGPSPWR=1"};
 unsigned char gps_status[] = {"AT+CGPSSTATUS?"};
 unsigned char gps_getloc[] = {"AT+CGPSOUT=32"};
@@ -177,8 +178,7 @@ else
 
 // Declare your global variables here
 
-void usartinit()
-{
+void usartinit() {
     UBRRH=00;
     UBRRL=77;
     UCSRB|=(1<<RXEN)|(1<<TXEN);
@@ -187,14 +187,13 @@ void usartinit()
 
 void put_command(unsigned char *s) {
     int i;
-    for( i = 0; s[i]; ++i)
+    for(i = 0; s[i]; ++i)
         putchar(s[i]);
     putchar('\r');
 }
 
 void init() {
-    unsigned char s1[] = {"AT"};
-    put_command(s1);
+    put_command(module_init);
 }
 
 void init_gps() {
@@ -206,11 +205,11 @@ void init_gps() {
 void sendLoc() {
   int i;
   for (i = 0; i < locEndInd; i++) {
-    PORTB = loc[i];
-    PORTD.4 = 1;
+	PORTB = loc[i];
+	PORTD.4 = 1;
     delay_ms(1);
     PORTD.4 = 0;
-    while(PORTD.5 == 0) ;
+	while(PORTD.5 == 0) ;
     while(PORTD.5 == 1) ;
   }
   PORTB = 0;
@@ -221,14 +220,12 @@ void sendLoc() {
 
 
 // External Interrupt 1 service routine
-interrupt [EXT_INT1] void ext_int1_isr(void)
-{
+interrupt [EXT_INT1] void ext_int1_isr(void) {
     while(PORTD.3 == 1) ;
     sendLoc();
 }
 
-void main(void)
-{
+void main(void) {
 // Declare your local variables here
 
 // Input/Output Ports initialization
